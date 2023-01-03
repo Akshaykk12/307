@@ -1,0 +1,37 @@
+# Quicksort is a sorting algorithm based on the divide and conquer approach where. An array is 
+# divided into subarrays by selecting a pivot element (element selected from the array).
+
+# problem statement
+
+'''Write a python program to store first year percentage of students in an array. Write function for sorting 
+array of floating point number in ascending order using 
+1. quick sort and display five scores'''
+
+def quicksort(array):
+    if len(array)<=1:
+        return array
+    pivot = array[0]
+    left_array = []
+    right_array = []
+    for i in range(1, len(array)):
+        if (array[i]<pivot):
+            left_array.append(array[i])    
+        else:
+            right_array.append(array[i])
+    return quicksort(left_array) + [pivot] + quicksort(right_array)
+
+total_students = int(input("Enter total number of students : "))
+score_list = []
+for i in range(total_students):
+    score =  float(input("Enter the score of student : "))
+    score_list.append(score)
+print("list of score of students :")
+print(score_list)
+print ("Sorted list of scores student : ")
+score_list = quicksort(score_list)
+print(score_list)
+print("The top five scores are as follows : ")
+for i in range(5):
+    print(score_list[-i-1])
+#O(nlogn)
+#worst (on2)

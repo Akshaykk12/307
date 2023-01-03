@@ -1,0 +1,109 @@
+grpA=[]                 #cricket
+grpB=[]                 #Badminton
+grpC=[]                 #footBall
+
+nA=int(input("Enter the number of students Playing Cricket: "))
+print("Enter the students playing Cricket :")
+for i in range(nA):
+    print(i+1,end=" ")
+    A=input()
+    grpA.append(A)
+
+nB=int(input("Enter the number of students playing Badminton: "))
+print("Enter the students playing Badminton: ")
+for i in range(nB):
+    print(i+1,end=" ")
+    B=input()
+    grpB.append(B)
+
+nC=int(input("Enter the number of students playing Football : "))
+print("Enter the number of students playing Football : ")
+for i in range(nC):
+    print(i+1,end=" ")
+    C=input()
+    grpC.append(C)
+
+def cricAndBadmin(grpA,grpB):
+    global intersect
+    intersect=[]
+    for i in grpA:
+        if i in grpB:
+            intersect.append(i)
+        else:
+            continue
+    return intersect
+
+def Difference(grpA,grpB):
+    diff=[]
+    grpA.extend(grpB)
+    for i in grpA:
+        if i in intersect:
+            continue
+        else:
+            diff.append(i)
+    return diff
+
+def onlyFootball(grpA,grpB,grpC):
+    fb=[]
+    grpA.extend(grpB)
+    for i in grpC:
+        if i in grpA:
+            continue
+        else:
+            fb.append(i)
+    trulen=[]
+    for i in fb:
+        if fb.count(i)>1:
+            continue
+        else:
+            trulen.append(i)
+    return len(trulen)
+    
+
+def onlyCricFootb(grpA,grpB,grpC):
+    cricFoot=[]
+    CNF=[]
+    
+    for i in grpC:
+        if i in grpA:
+            cricFoot.append(i)
+        else:
+            continue
+    for i in cricFoot:
+        if i in grpB:
+            continue
+        else:
+            CNF.append(i)    
+    
+    trulen=[]
+    for i in CNF:
+        if CNF.count(i)>1:
+            continue
+        else:
+            trulen.append(i)
+    return len(trulen)
+
+while(True):
+    print("Enter \n1-List of students who play both cricket and Badminton: ")
+    print("2-List of students who play either cricket or badminton : ")
+    print("3-Number of students Who play neither cricket nor badminton : ")
+    print("4-Number of students who play cricket and football but not badminton : ")
+    print("0-To EXIT")
+    ch=int(input("->"))
+    if ch==1:
+        p=cricAndBadmin(grpA,grpB)
+        print(p)
+    elif ch==2:
+        q=Difference(grpA,grpB)
+        print(q)
+    elif ch==3:
+        r=onlyFootball(grpA,grpB,grpC)
+        print(r)
+    elif ch==4:
+        s=onlyCricFootb(grpA,grpB,grpC)
+        print(s)
+    elif ch==0:
+        break
+    else:
+        print("Choose given options!")
+        break

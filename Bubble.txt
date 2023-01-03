@@ -1,0 +1,43 @@
+print("----------------------Selection sort----------------------")
+array = []
+a=int(input("entre no of "))
+print("enter values")
+for i in range(0,a):
+    x=int(input())
+    array.append(x)
+print(array)
+n = len(array)
+for i in range(0,n-1):
+    min = i
+    for j in range(i+1,n):
+        if (array[i]>= array[j]):
+            min = j
+            temp = array[i]
+            array[i] = array[j]
+            array[j] = temp
+print("Array after sorting is as shown below : ")
+for k in range(n):
+    print(array[k],end=" ")
+print("Done with selection sort")
+
+#avg worst o(n2)
+# # bubble sort
+print("----------------------Bubble sort----------------------")
+array = []
+a=int(input("entre no of "))
+print("enter values")
+for i in range(0,a):
+    x=int(input())
+    array.append(x)
+print(array)
+
+counter = 0
+while counter < a:
+    counter += 1
+    for j in range(0,a-1):
+        if array[j]>array[j+1]:
+            array[j], array[j+1] = array[j+1], array[j]
+            
+print("Array after sorting : ")
+print(array)
+#avg worst o(n2)

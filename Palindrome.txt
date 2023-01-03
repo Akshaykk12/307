@@ -1,0 +1,60 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+#define n 100
+class Stack{
+    public:
+    char array[n];
+    int top=-1;
+    void push(char c){
+        if(top==n-1){
+            cout<<"Stack is full"<<endl;
+        }
+        array[++top]=c;
+    }
+    char pop(){
+        if(top==-1){
+            cout<<"Stack is Empty"<<endl;
+        }
+        return array[top--];
+    }
+    void display(){
+        if(top==-1){
+            cout<<"Stack is Empty"<<endl;
+        }
+        for(int i=0;i<top;i++){
+            cout<<array[i];
+            
+        }
+    }
+};
+int main()
+{
+    Stack s;
+    string input_string;
+    cout<<"Enter a string: ";
+    getline(cin,input_string);
+    string output_string=" ";
+    for(int i=0;i<input_string.size();i++){
+        char ch=input_string[i];
+        if(ch>='a' && ch<='z'){
+            ch=(char)(ch-'a'+'A');
+        }
+        if(ch>='A' && ch<='Z'){
+            s.push(ch);
+            output_string.push_back(ch);
+        }
+    }
+    cout<<"original string is: "<<output_string<<endl;
+    string rev_string=" ";
+    while(s.top!=-1){
+        rev_string.push_back(s.pop());
+    }
+    cout<<"Reverse string is: "<<rev_string<<endl;
+    if(output_string.compare(rev_string))
+        cout<<"Not palindrome"<<endl;
+    else
+        cout<<" palindrome"<<endl;
+    
+   return 0;
+}

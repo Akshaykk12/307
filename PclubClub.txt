@@ -1,0 +1,299 @@
+#include<iostream>
+#include<string>
+using namespace std;
+class node{
+    int prn;
+    string name;
+    node *next;
+    public:
+    node(int y,string x){
+        prn=y;
+        next=NULL;
+        name=x;
+
+    }
+
+    friend class list;
+
+};
+class list{
+    node *start;
+    public:
+       list(){
+        start=NULL;
+
+       }
+       void create();
+       void insertAtBegin();
+       void insertAtEnd();
+       void insertInList();
+       void deleteAtBegin();
+       void deleteAtEnd();
+       void deleteInList();
+       void display();
+       int compute();
+       void concatenate(list &q);
+};
+void list::create(){
+    string x;
+    int y;
+    if(start==NULL){
+        cout<<"\nEnter name of member:";
+        cin>>x;
+        cout<<"\nEnter PRN no.:";
+        cin>>y;
+        start=new node(y,x);
+        cout<<"\n-------------------list created----------";
+    }else{
+        cout<<"\n--------------------list is already created--------";
+
+    }
+
+
+}
+void list::insertAtBegin(){
+    string x;
+    int y;
+    node *temp;
+    if(start==NULL){
+        create();
+    }else{
+        cout<<"\nEnter name of member:";
+        cin>>x;
+        cout<<"\nEnter PRN no.:";
+        cin>>y;
+        temp=new node(y,x);
+        temp->next=start;
+        start=temp;
+        
+    }
+
+}
+void list::insertAtEnd(){
+    string x;
+    int y;
+    node *t=start;         //create new node
+    if(start==NULL){
+        create();
+    }else{
+        cout<<"\nEnter name of member:";
+        cin>>x;
+        cout<<"\nEnter PRN no.:";
+        cin>>y;
+
+        while(t->next!=NULL){       //iterte till last null 
+            t=t->next;
+        }
+            node *p=new node(y,x);
+            t->next=p;
+    }
+}
+void list::insertInList(){
+    int prev,flag=0;
+    cout<<"\nPRN no. after do you want to insert:";
+    cin>>prev;
+    node *t;
+    string x;
+    int y;
+    t=start;
+    while(t!=NULL){
+        if(t->prn==prev){
+            flag=1;
+            break;
+        }t=t->next;
+    }
+        if(flag==1){
+            node *p;
+            cout<<"\nenter prn no.:";
+            cin>>y;
+            cout<<"\nenter name:";
+            cin>>x;
+            p=new node(y,x);
+            p->next=t->next;
+            t->next=p;
+
+        }else{
+            cout<<"\n"<<prev<<"is not in list";
+
+        }
+    
+}
+void list::deleteAtBegin(){
+    node *t;
+    t=start;
+    if(t==NULL){
+        cout<<"\nlist is empty";
+
+    }else{
+        
+        start=start->next;
+        t->next=NULL;
+        delete t;
+        
+    }
+}
+void list::deleteAtEnd(){
+    node *t,*prev;
+    t=start;
+    if(start==NULL){
+        cout<<"\nList is empty";
+    }else{
+        while(t->next!=NULL){
+            prev=t;
+            t=t->next;
+        }
+        prev->next=NULL;
+        delete t;
+    }
+}
+void list::deleteInList(){
+    int y;
+    int flag=0;
+    node *t,*prev;
+    if(start==NULL){
+        cout<<"\nList is empty";
+
+    }else{
+        cout<<"\nEnter prn no. you want to delete:";
+        cin>>y;
+        t->next=start->next;
+        while(t->next!=NULL){
+            if(t->prn==y){
+                flag=1;
+                break;
+            }prev=t;
+            t=t->next;
+        }if (flag==1){
+            prev->next=t->next;
+            t->next=NULL;
+            delete t;
+
+        }else{
+            cout<<"\nmember is not in list";
+        }
+    }
+}
+void list::display(){
+    node *t;
+    t=start;
+    if(start==NULL){
+        cout<<"\nlist is empty";
+    }else{
+        cout<<"\n------------list----------\n";
+        while(t!=NULL){
+            cout<<t->prn<<"-"<<t->name<<"\n";
+            t=t->next;
+        }
+
+    }
+}
+int list::compute(){
+    node *t;
+    int count=0;
+    t=start;
+    if(start==NULL){
+        cout<<"\nlist is empty";
+        return 0;
+    }else{
+        while(t!=NULL){
+            count++;
+            t=t->next;
+
+
+        }
+        cout<<"\ntotal no.:"<<count;
+        return 0;
+    }
+}
+void list::concatenate(list &q){
+    node *t,*p;
+    t=q.start;
+    if(t==NULL){
+        cout<<"\nlist is empty";
+    }
+    p=start;
+    while(p->next!=NULL){
+        p=p->next;
+    }
+    p->next=t;
+    q.start=NULL;
+    cout<<"\nAfter concatenation:";
+    display();
+
+}
+int main(){
+    list *l=new list();
+    list l1,l2;
+    int ch,select_list;
+    x:cout<<"\nselect list \n1.list1\n2.list2\nEnter choice:";
+    cin>>select_list;
+    if(select_list==1){
+        l=&l1;
+
+    }else if(select_list==2){
+        l=&l2;
+    }else{
+        cout<<"\nwrong list";
+        goto x;
+    }
+    do{
+        cout<<"\n1.create \n2.insert president \n3.insert secretary\n4.insert after member in list\n5.display list"
+        <<"\n6.delete secretary\n7.delete president\n8.delete member\n9.total no. of members\n10.reselect list "
+        <<"\n11.combine list\n12.exit\nEnter choice:";
+        cin>>ch;
+        switch(ch){
+            case 1:
+            l->create();
+            cout<<"\nlist created";
+            break;
+            case 2:
+            l->insertAtBegin();
+            cout<<"\npresident inserted in list";
+            break;
+            case 3:
+            l->insertAtEnd();
+            cout<<"\nsecretary inserted in list";
+            break;
+            case 4:
+            l->insertInList();
+            cout<<"\nmemeber inserted in list";
+            break;
+            case 5:
+            l->display();
+            break;
+            case 6:
+            l->deleteAtEnd();
+            cout<<"\nseceretary deleted";
+            break;
+            case 7:
+            l->deleteAtBegin();
+            cout<<"\npresident deleted";
+            break;
+            case 8:
+            l->deleteInList();
+            cout<<"\nmemeber deleted";
+            break;
+            case 9:
+            l->compute();
+            break;
+            case 10:
+            goto x;
+            break;
+            case 11:
+            l1.concatenate(l2);
+            break;
+            case 12:
+            exit(0);
+            default:
+            cout<<"\nWrong choice";
+
+
+
+        }
+    }while(ch!=0);
+    l->create();
+    l->insertAtBegin();
+    l->insertAtEnd();
+    l->display();
+    return 0;
+}

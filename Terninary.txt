@@ -1,0 +1,39 @@
+roll_no = []
+val = int(input("Enter number of roll calls: "))
+for i in range(val):
+    x = int(input("Enter roll call: "))
+    roll_no.append(x)
+
+
+roll_no.sort()
+print("your roll no list is",roll_no)
+
+def ternarySearch(l, r, key, ar):
+    if (r >= l):
+        mid1 = l + (r - l) // 3
+        mid2 = r - (r - l) // 3
+        if (ar[mid1] == key):
+            return mid1
+        if (ar[mid2] == key):
+            return mid2
+        if (key < ar[mid1]):
+            return ternarySearch(l, mid1 - 1, key, ar)
+        elif (key > ar[mid2]):
+            return ternarySearch(mid2 + 1, r, key, ar)
+        else:
+            return ternarySearch(mid1 + 1, mid2 - 1, key, ar)
+    #return -1
+
+
+ar = roll_no
+l = 0
+r = len(roll_no) - 1
+key = len(roll_no) // 2
+
+key = int(input("Enter number to be search:"))
+p = ternarySearch(l, r, key, ar)
+print("Index of", key, "is", p)
+
+
+#best o(1)
+#avg worst o(log3 n)

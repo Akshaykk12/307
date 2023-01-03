@@ -1,0 +1,44 @@
+def FDS_marks():
+    global l1
+    l1=[]
+    global n
+    n=int(input("enter number of students: "))
+    print("Enter marks: ")
+    for i in range(0,n):
+        x=int(input())
+        l1.append(x)
+def avg():
+    j=0
+    for i in range (0,n):
+        j=j+l1[i]
+    print("average of class is: ",j/n)
+def max_minscore():
+    max=0
+    for i in range(0,n):
+        if l1[i]>max:
+            max=l1[i]
+    min =max
+    for i in range(0,n):
+        if l1[i]<min:
+            min=l1[i]
+
+    print("highest is", max, "lowest is ",min)
+
+def absent():
+    x=l1.count(0)
+    print("absent students are: ",x)
+def high_frequency():
+    j=0
+    k=0
+    for i in l1:
+        if l1.count(i)>j:
+            j=l1.count(i)
+            k=i
+    print("highest frequency of marks: ",k," having ", l1.count(k),"times")
+    
+FDS_marks()
+avg()
+max_minscore()
+
+absent()
+high_frequency()
